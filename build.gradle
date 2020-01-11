@@ -21,6 +21,10 @@ allprojects {
         jcenter()
         
     }
+
+    ext {
+        retrofitVersion = "2.7.1"
+    }
 }
 
 task clean(type: Delete) {
