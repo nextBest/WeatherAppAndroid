@@ -1,0 +1,3 @@
+package com.nextbest.weatherappandroid.data.repository
+
+interface WeatherRepository

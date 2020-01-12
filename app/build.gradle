@@ -8,6 +8,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
+    flavorDimensions "default"
     defaultConfig {
         applicationId "com.nextbest.weatherappandroid"
         minSdkVersion 21
@@ -25,6 +26,11 @@ android {
     compileOptions {
         sourceCompatibility 1.8
         targetCompatibility 1.8
+    }
+    productFlavors {
+        development {
+            buildConfigField "String", "API_PATH", "\"https://www.metaweather.com/api/\""
+        }
     }
 }
 
