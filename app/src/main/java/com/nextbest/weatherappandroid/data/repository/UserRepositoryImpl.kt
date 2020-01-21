@@ -2,7 +2,7 @@ package com.nextbest.weatherappandroid.data.repository
 
 class UserRepositoryImpl: UserRepository {
     override fun canShowTutorial(): Boolean {
-        // TODO get value from 
+        // TODO get value from
         return false
     }
 
