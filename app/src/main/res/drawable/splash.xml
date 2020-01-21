@@ -3,10 +3,8 @@
 
     <item android:drawable="@drawable/splash_bg" />
 
-    <item android:drawable="@drawable/logo"
-        android:width="100dp"
-        android:height="100dp"
-        android:gravity="center">
-    </item>
+    <item
+        android:drawable="@drawable/logo"
+        android:gravity="center"></item>
 
 </layer-list>
