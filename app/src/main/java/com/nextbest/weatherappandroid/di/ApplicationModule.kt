@@ -2,6 +2,8 @@ package com.nextbest.weatherappandroid.di
 
 import android.app.Application
 import android.content.Context
+import com.nextbest.weatherappandroid.data.local.SharedPreferencesStorage
+import com.nextbest.weatherappandroid.data.local.SharedPreferencesStorageImpl
 import com.nextbest.weatherappandroid.data.network.NetworkService
 import com.nextbest.weatherappandroid.data.network.WeatherApi
 import com.nextbest.weatherappandroid.data.repository.UserRepository
@@ -33,5 +35,11 @@ class ApplicationModule {
     @Singleton
     fun provideUserRepository(): UserRepository {
         return UserRepositoryImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferencesStorage(context: Context): SharedPreferencesStorage {
+        return SharedPreferencesStorageImpl(context)
     }
 }
