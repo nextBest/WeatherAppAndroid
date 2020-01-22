@@ -33,8 +33,8 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(): UserRepository {
-        return UserRepositoryImpl()
+    fun provideUserRepository(sharedPreferencesStorage: SharedPreferencesStorage): UserRepository {
+        return UserRepositoryImpl(sharedPreferencesStorage)
     }
 
     @Provides

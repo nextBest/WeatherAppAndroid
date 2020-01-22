@@ -1,12 +1,17 @@
 package com.nextbest.weatherappandroid.data.repository
 
-class UserRepositoryImpl: UserRepository {
+import com.nextbest.weatherappandroid.data.local.SharedPreferencesStorage
+
+class UserRepositoryImpl(private val sharedPreferencesStorage: SharedPreferencesStorage): UserRepository {
     override fun canShowTutorial(): Boolean {
-        // TODO get value from
-        return false
+        return !sharedPreferencesStorage.getBoolean(TUTORIAL_SHOWN, false)
     }
 
     override fun setTutorialWasShown() {
-        // TODO save tutorial showed
+        sharedPreferencesStorage.putBoolean(TUTORIAL_SHOWN, true)
+    }
+
+    companion object {
+        private const val TUTORIAL_SHOWN = "TUTORIAL_SHOWN"
     }
 }
