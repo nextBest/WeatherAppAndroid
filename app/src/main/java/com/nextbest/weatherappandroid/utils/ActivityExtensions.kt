@@ -7,9 +7,13 @@ import com.nextbest.weatherappandroid.R
 
 fun <T> AppCompatActivity.openActivity(it: Class<T>) {
     startActivity(Intent(this, it))
+    finish()
 }
 
-fun AppCompatActivity.pushFragment(fragment: Fragment) {
-    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment)
+fun AppCompatActivity.addFragment(fragment: Fragment, tag: String, hidden: Boolean = false) {
+    supportFragmentManager
+        .beginTransaction()
+        .add(R.id.fragmentContainer, fragment, tag)
+        .apply { if (hidden) hide(fragment) }
         .commit()
 }
