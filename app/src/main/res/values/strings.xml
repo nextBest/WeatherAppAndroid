@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">WeatherAppAndroid</string>
+
+    <!--Main Screen-->
+    <string name="map_menu">Map</string>
+    <string name="search_menu">Search</string>
 </resources>
