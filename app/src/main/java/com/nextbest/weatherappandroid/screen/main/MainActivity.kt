@@ -18,9 +18,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // TODO manage save instance state
-        initChildren()
+        if (savedInstanceState == null) {
+            initChildren()
+        } else {
+            activeFragmentTag = savedInstanceState.getString(ACTIVE_FRAGMENT_TAG)
+        }
         setupBottomNavigation()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState.apply {
+            putString(ACTIVE_FRAGMENT_TAG, activeFragmentTag)
+        })
     }
 
     private fun initChildren() {
@@ -65,5 +74,6 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val MAP_FRAGMENT = "MAP_FRAGMENT"
         private const val SEARCH_FRAGMENT = "SEARCH_FRAGMENT"
+        private const val ACTIVE_FRAGMENT_TAG = "ACTIVE_FRAGMENT_TAG"
     }
 }
