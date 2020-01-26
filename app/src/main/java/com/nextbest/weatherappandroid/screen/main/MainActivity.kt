@@ -1,14 +1,14 @@
 package com.nextbest.weatherappandroid.screen.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.screen.main.map.MapFragment
 import com.nextbest.weatherappandroid.screen.main.search.SearchFragment
 import com.nextbest.weatherappandroid.utils.addFragment
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
 
     private lateinit var mapFragment: MapFragment
     private lateinit var searchFragment: SearchFragment

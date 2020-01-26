@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.nextbest.weatherappandroid.di.ViewModelFactory
 import com.nextbest.weatherappandroid.utils.BundleStorage
 import dagger.android.support.DaggerFragment
-
 import javax.inject.Inject
 
 abstract class BaseViewModelFragment<T : ViewModel> : DaggerFragment() {
