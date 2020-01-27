@@ -10,8 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screen.tutorial.TutorialActivity"
-            android:screenOrientation="portrait"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${GOOGLE_GEO_API_KEY}" />
+
+        <activity
+            android:name=".screen.tutorial.TutorialActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".screen.splash.SplashActivity"
             android:screenOrientation="portrait"
