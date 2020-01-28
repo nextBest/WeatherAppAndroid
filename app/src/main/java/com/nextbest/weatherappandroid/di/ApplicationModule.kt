@@ -28,7 +28,7 @@ class ApplicationModule {
     @Provides
     @Singleton
     fun provideWeatherRepository(networkService: NetworkService): WeatherRepository {
-        return WeatherRepositoryImpl(networkService.getRetorfit().create(WeatherApi::class.java))
+        return WeatherRepositoryImpl(networkService.getRetrofit().create(WeatherApi::class.java))
     }
 
     @Provides

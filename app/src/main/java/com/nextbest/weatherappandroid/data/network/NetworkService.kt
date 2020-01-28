@@ -27,5 +27,5 @@ class NetworkService {
         return OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
     }
 
-    fun getRetorfit() = retrofit
+    fun getRetrofit() = retrofit
 }
