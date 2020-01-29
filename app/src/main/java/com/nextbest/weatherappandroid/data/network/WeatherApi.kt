@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface WeatherApi {
     @GET("location/search")
-    fun getLocacationByCoordinates(@Query("lattlong") latLong: String): Single<Location>
+    fun getLocacationByCoordinates(@Query("lattlong") latLong: String): Single<List<Location>>
 
     @GET("location/{woeid}/")
     fun getWeatherDetails(@Path("woeid") woeid: String): Single<WeatherData>
