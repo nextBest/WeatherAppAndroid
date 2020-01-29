@@ -3,6 +3,7 @@ package com.nextbest.weatherappandroid.screen
 import androidx.lifecycle.ViewModel
 import com.nextbest.weatherappandroid.utils.KeyValueStorage
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 
 abstract class BaseViewModel : ViewModel() {
@@ -27,6 +28,10 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     open fun writeToInstanceState(keyValueStorage: KeyValueStorage) {
+    }
+
+    fun addSubscription(disposable: Disposable){
+        compositeDisposable.add(disposable)
     }
 
     override fun onCleared() {
