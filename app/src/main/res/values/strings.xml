@@ -4,4 +4,10 @@
     <!--Main Screen-->
     <string name="map_menu">Map</string>
     <string name="search_menu">Search</string>
+
+    <!--Rational Dialog-->
+    <string name="rational_dialog_title">Location Permission</string>
+    <string name="rational_dialog_message">Grant location permission to let us show your place on map.</string>
+    <string name="rational_dialog_accept_button">Gran permissions</string>
+    <string name="rational_dialog_reject_button">Cancel</string>
 </resources>
