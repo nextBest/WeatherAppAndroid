@@ -2,6 +2,7 @@ package com.nextbest.weatherappandroid.screen.main.map
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.nextbest.weatherappandroid.R
+import com.nextbest.weatherappandroid.data.model.WeatherData
 import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 import com.nextbest.weatherappandroid.utils.*
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -26,6 +28,7 @@ class MapFragment : BaseViewModelFragment<MapViewModel>(), OnMapReadyCallback {
 
     override fun getViewModelClass() = MapViewModel::class.java
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var listener: Listener
 
     private var googleMap: GoogleMap? = null
 
@@ -64,8 +67,13 @@ class MapFragment : BaseViewModelFragment<MapViewModel>(), OnMapReadyCallback {
             showErrorSnackBar(it)
         }
         viewModel.goToWeatherDetailsScreen.observeEvent(this) {
-            // TODO go to weather details screen
+            listener.goToWeatherDetailsScreen(it)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = ListenerAttach.attachListener(context)
     }
 
     private fun checkLocationPermission() {
@@ -149,6 +157,10 @@ class MapFragment : BaseViewModelFragment<MapViewModel>(), OnMapReadyCallback {
         if (requestCode == LOCATION_PERMISSION_REQUEST_CODE && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             searchUserLocation()
         }
+    }
+
+    interface Listener {
+        fun goToWeatherDetailsScreen(weatherData: WeatherData)
     }
 
     companion object {
