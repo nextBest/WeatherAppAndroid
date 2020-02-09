@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.Exception
 
 class NetworkService {
 
@@ -28,4 +29,8 @@ class NetworkService {
     }
 
     fun getRetrofit() = retrofit
+
+    companion object NetworkErrors {
+        class NoInternetConnection(): Exception()
+    }
 }

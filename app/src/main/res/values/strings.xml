@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">WeatherAppAndroid</string>
+    
+    <!--Common-->
+    <string name="no_internet_connection">No internet connection. Try again later.</string>
+    <string name="unknown_error">A problem occurred. Try again later.</string>
 
     <!--Main Screen-->
     <string name="map_menu">Map</string>
@@ -10,4 +14,7 @@
     <string name="rational_dialog_message">Grant location permission to let us show your place on map.</string>
     <string name="rational_dialog_accept_button">Gran permissions</string>
     <string name="rational_dialog_reject_button">Cancel</string>
+
+    <!--Map-->
+    <string name="map_no_location_found_for_coordinates">No location found</string>
 </resources>

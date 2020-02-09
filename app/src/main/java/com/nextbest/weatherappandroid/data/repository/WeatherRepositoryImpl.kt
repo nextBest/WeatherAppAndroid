@@ -15,7 +15,7 @@ class WeatherRepositoryImpl(private val weatherApi: WeatherApi) : WeatherReposit
                 locationList.minBy { it.woeid }?.let {
                     return@flatMap weatherApi.getWeatherDetails(it.woeid.toString())
                 } ?: run {
-                    throw Error("No locations")
+                    throw WeatherApi.ApiErrors.NoLocationForCoordinates()
                 }
             }
     }

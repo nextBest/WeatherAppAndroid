@@ -16,7 +16,6 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.snackbar.Snackbar
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 import com.nextbest.weatherappandroid.utils.*
@@ -125,8 +124,10 @@ class MapFragment : BaseViewModelFragment<MapViewModel>(), OnMapReadyCallback {
     }
 
     private fun searchUserLocation() {
-        fusedLocationClient.lastLocation.addOnSuccessListener {
-            viewModel.locationFind(it.latitude, it.longitude)
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            location?.let {
+                viewModel.locationFind(it.latitude, it.longitude)
+            }
         }.addOnFailureListener {
             it.printStackTrace()
         }
