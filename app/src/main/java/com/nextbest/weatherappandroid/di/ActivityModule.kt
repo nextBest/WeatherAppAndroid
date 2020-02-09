@@ -1,6 +1,7 @@
 package com.nextbest.weatherappandroid.di
 
 import com.nextbest.weatherappandroid.screen.main.MainActivity
+import com.nextbest.weatherappandroid.screen.main.MainActivityFragmentsModule
 import com.nextbest.weatherappandroid.screen.splash.SplashActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -8,7 +9,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class ActivityModule {
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [MainActivityFragmentsModule::class])
     abstract fun contributeMainActivity(): MainActivity
 
     @ContributesAndroidInjector
