@@ -16,6 +16,6 @@ interface WeatherApi {
     fun getWeatherDetails(@Path("woeid") woeid: String): Single<WeatherData>
 
     companion object ApiErrors {
-        class NoLocationForCoordinates(): Exception()
+        class NoLocationForCoordinates: Exception()
     }
 }

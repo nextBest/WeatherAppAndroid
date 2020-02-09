@@ -25,7 +25,7 @@ class ApplicationModule {
 
     @Provides
     @Singleton
-    fun provideNetworkService(): NetworkService = NetworkService()
+    fun provideNetworkService(context: Context): NetworkService = NetworkService(context)
 
     @Provides
     @Singleton
