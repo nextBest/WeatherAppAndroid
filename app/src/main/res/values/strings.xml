@@ -21,4 +21,11 @@
     <!--Search-->
     <string name="search_title">Search</string>
     <string name="search_enter_city_hint">Enter city name</string>
+    
+    <!--Error View-->
+    <string name="error_view_reload">Reload</string>
+    <string name="error_view_connection_error_title">Connection Error</string>
+    <string name="error_view_connection_error_message">No internet connection. Check your internet connection and click reload.</string>
+    <string name="error_view_unknown_error_title">Error occurred</string>
+    <string name="error_view_unknown_error_message">Error occurred. Click reload.</string>
 </resources>
