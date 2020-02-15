@@ -6,7 +6,6 @@ import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import java.lang.Exception
 
 interface WeatherApi {
     @GET("location/search")
@@ -15,7 +14,10 @@ interface WeatherApi {
     @GET("location/{woeid}/")
     fun getWeatherDetails(@Path("woeid") woeid: String): Single<WeatherData>
 
+    @GET("location/search")
+    fun getLocationByQuery(@Query("query") query: String): Single<List<Location>>
+
     companion object ApiErrors {
-        class NoLocationForCoordinates: Exception()
+        class NoLocationForCoordinates : Exception()
     }
 }

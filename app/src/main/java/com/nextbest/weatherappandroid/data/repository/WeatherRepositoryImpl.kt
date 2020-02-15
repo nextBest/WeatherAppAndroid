@@ -22,4 +22,6 @@ class WeatherRepositoryImpl(private val weatherApi: WeatherApi) : WeatherReposit
 
     override fun getWeatherInfo(woeid: Int) = weatherApi.getWeatherDetails(woeid.toString())
 
+    override fun searchCity(query: String) = weatherApi.getLocationByQuery(query)
+
 }
