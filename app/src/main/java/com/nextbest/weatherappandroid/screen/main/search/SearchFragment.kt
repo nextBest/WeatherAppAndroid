@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.nextbest.weatherappandroid.R
+import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
 
@@ -17,6 +18,5 @@ class SearchFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
-
 
 }

@@ -17,4 +17,8 @@
 
     <!--Map-->
     <string name="map_no_location_found_for_coordinates">No location found</string>
+
+    <!--Search-->
+    <string name="search_title">Search</string>
+    <string name="search_enter_city_hint">Enter city name</string>
 </resources>
