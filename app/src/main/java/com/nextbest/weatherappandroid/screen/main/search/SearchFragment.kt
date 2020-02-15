@@ -1,16 +1,15 @@
 package com.nextbest.weatherappandroid.screen.main.search
 
-
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.nextbest.weatherappandroid.R
-import kotlinx.android.synthetic.main.fragment_search.*
+import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
+
+    override fun getViewModelClass() = SearchViewModel::class.java
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
