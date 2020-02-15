@@ -30,4 +30,6 @@ class SearchViewModel @Inject constructor(private val weatherRepository: Weather
         get() = _showList
 
 
+
+
 }
