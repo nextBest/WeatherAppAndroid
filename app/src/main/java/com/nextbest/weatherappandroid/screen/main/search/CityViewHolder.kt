@@ -25,7 +25,7 @@ class CityViewHolder(itemView: View, listener: Listener) : RecyclerView.ViewHold
             cityName.text = cityViewModel.location.title
             infoLayout.setVisibility(cityViewModel.expanded)
             expandButton.text =
-                itemView.context.getString(if (cityViewModel.expanded) R.string.search_show_less else R.string.search_show_more)
+                context.getString(if (cityViewModel.expanded) R.string.search_show_less else R.string.search_show_more)
             locationType.setTextWithSpan(
                 context.getString(
                     R.string.search_location_type,
