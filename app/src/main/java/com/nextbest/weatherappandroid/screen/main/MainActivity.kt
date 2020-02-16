@@ -27,6 +27,7 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener, SearchFrag
             activeFragmentTag = savedInstanceState.getString(ACTIVE_FRAGMENT_TAG)
         }
         setupBottomNavigation()
+        setTitle()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -38,10 +39,15 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener, SearchFrag
     private fun initChildren() {
         mapFragment = MapFragment()
         searchFragment = SearchFragment()
-
         addFragment(mapFragment, MAP_FRAGMENT)
         addFragment(searchFragment, SEARCH_FRAGMENT, true)
+        activeFragmentTag = MAP_FRAGMENT
         mainBottomNavigation.selectedItemId = R.id.actionMap
+    }
+
+    private fun setTitle() {
+        mainToolbar.title =
+            getString(if (activeFragmentTag == MAP_FRAGMENT) R.string.map_menu else R.string.search_menu)
     }
 
     private fun setupBottomNavigation() {
@@ -72,6 +78,7 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener, SearchFrag
                 .commit()
         }
         activeFragmentTag = newActiveFragmentTag
+        setTitle()
     }
 
     override fun goToWeatherDetailsScreen(weatherData: WeatherData) {
