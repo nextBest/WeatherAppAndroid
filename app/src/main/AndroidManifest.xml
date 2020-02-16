@@ -36,7 +36,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".screen.weatherdetails.WeatherDetails"
+            android:name=".screen.weatherdetails.WeatherDetailsActivity"
             android:screenOrientation="portrait" />
     </application>
 
