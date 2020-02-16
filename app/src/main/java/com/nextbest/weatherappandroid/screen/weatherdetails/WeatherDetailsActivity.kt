@@ -9,8 +9,9 @@ import com.nextbest.weatherappandroid.data.model.WeatherData
 import com.nextbest.weatherappandroid.screen.weatherdetails.actualweather.ActualWeatherFragment
 import com.nextbest.weatherappandroid.utils.pushFragment
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_weather_details.*
 
-class WeatherDetailsActivity : DaggerAppCompatActivity() {
+class WeatherDetailsActivity : DaggerAppCompatActivity(), ActualWeatherFragment.Listener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,10 @@ class WeatherDetailsActivity : DaggerAppCompatActivity() {
                 )
             }
         }
+    }
+
+    override fun setTitle(title: String) {
+        weatherToolbar.title = title
     }
 
     companion object {
