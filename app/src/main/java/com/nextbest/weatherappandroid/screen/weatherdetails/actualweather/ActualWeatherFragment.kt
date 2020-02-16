@@ -2,14 +2,15 @@ package com.nextbest.weatherappandroid.screen.weatherdetails.actualweather
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.nextbest.weatherappandroid.R
+import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 
-class ActualWeatherFragment : Fragment() {
+class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
+
+    override fun getViewModelClass() = ActualWeatherViewModel::class.java
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
