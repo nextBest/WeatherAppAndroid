@@ -3,27 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    tools:background="@drawable/bg_night"
     tools:context=".screen.weatherdetails.actualweather.ActualWeatherFragment">
 
-    <ScrollView
-        android:id="@+id/content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:scrollbars="none" />
 
 
     <com.nextbest.weatherappandroid.views.LoaderView
         android:id="@+id/loaderView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         tools:visibility="gone" />
 
     <com.nextbest.weatherappandroid.views.ErrorView
         android:id="@+id/errorView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         tools:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
