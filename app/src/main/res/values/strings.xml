@@ -25,6 +25,10 @@
     <string name="search_not_found_message">City not found, search for another city.</string>
     <string name="search_info_title">Search city</string>
     <string name="search_info_message">Start typing to search your city.</string>
+    <string name="search_show_more">Show more</string>
+    <string name="search_show_less">Show less</string>
+    <string name="search_show_place">Show place on map</string>
+    <string name="search_location_type">Location type: %s</string>
     
     <!--Error View-->
     <string name="error_view_reload">Reload</string>

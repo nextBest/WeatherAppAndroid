@@ -55,7 +55,7 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
             errorView.setErrorType(it)
         }
         viewModel.cityList.observe(this) {
-            cityAdapter.submitList(it)
+            cityAdapter.setData(it)
         }
     }
 

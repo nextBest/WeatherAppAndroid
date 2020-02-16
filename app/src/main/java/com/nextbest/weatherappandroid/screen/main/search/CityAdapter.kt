@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 
-class CityAdapter : ListAdapter<Location, CityViewHolder>(DiffCallback) {
+class CityAdapter : ListAdapter<CityViewModel, CityViewHolder>(DiffCallback),
+    CityViewHolder.Listener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
         return CityViewHolder(
@@ -15,21 +16,32 @@ class CityAdapter : ListAdapter<Location, CityViewHolder>(DiffCallback) {
                 R.layout.cell_city,
                 parent,
                 false
-            )
+            ), this
         )
     }
 
     override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-        holder.bindData(getItem(position))
+        holder.bindData(getItem(position), position)
     }
 
+    fun setData(data: List<Location>) {
+        submitList(data.map {
+            return@map CityViewModel(it)
+        })
+    }
 
-    private object DiffCallback : DiffUtil.ItemCallback<Location>() {
-        override fun areItemsTheSame(oldItem: Location, newItem: Location): Boolean {
-            return oldItem.woeid == newItem.woeid
+    override fun expandClicked(position: Int) {
+        val item = getItem(position)
+        item.expanded = item.expanded.not()
+        notifyItemChanged(position)
+    }
+
+    private object DiffCallback : DiffUtil.ItemCallback<CityViewModel>() {
+        override fun areItemsTheSame(oldItem: CityViewModel, newItem: CityViewModel): Boolean {
+            return oldItem.location.woeid == newItem.location.woeid
         }
 
-        override fun areContentsTheSame(oldItem: Location, newItem: Location): Boolean {
+        override fun areContentsTheSame(oldItem: CityViewModel, newItem: CityViewModel): Boolean {
             return oldItem == newItem
         }
     }
