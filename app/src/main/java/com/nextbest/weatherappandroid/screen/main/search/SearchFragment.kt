@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 import com.nextbest.weatherappandroid.utils.observe
@@ -30,6 +31,7 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
         setupRecyclerView()
         setupSearchView()
         setupErrorView()
+        setupHideSearchViewOnScrollList()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -87,6 +89,23 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
         errorView.setReloadListener(object : ErrorView.Listener {
             override fun reload() {
                 viewModel.searchCity(searchView.query.toString())
+            }
+        })
+    }
+
+    private fun setupHideSearchViewOnScrollList() {
+        val searchViewHeight = resources.getDimension(R.dimen.searchLayoutHeight)
+        var scrollPosition = 0
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                searchView.clearFocus()
+                scrollPosition -= dy
+                if (scrollPosition > -searchViewHeight) {
+                    searchLayout.translationY = scrollPosition.toFloat()
+                } else if (searchLayout.y > -searchViewHeight) {
+                    searchLayout.translationY = -searchViewHeight
+                }
             }
         })
     }
