@@ -1,35 +1,98 @@
 package com.nextbest.weatherappandroid.screen.main.search
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.nextbest.weatherappandroid.data.model.Location
+import com.nextbest.weatherappandroid.data.network.NetworkService
 import com.nextbest.weatherappandroid.data.repository.WeatherRepository
 import com.nextbest.weatherappandroid.screen.BaseViewModel
+import com.nextbest.weatherappandroid.views.ErrorView
+import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class SearchViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     BaseViewModel() {
 
-    private val _showLoader = MutableLiveData<Boolean>().apply { value = false }
-    val showLoader: LiveData<Boolean>
-        get() = _showLoader
+    private var searchCitySingle: Single<List<Location>>? = null
 
-    private val _showError = MutableLiveData<Boolean>().apply { value = false }
-    val showError: LiveData<Boolean>
-        get() = _showError
+    private val _errorType = MutableLiveData<ErrorView.ErrorType>()
+    val errorType: LiveData<ErrorView.ErrorType>
+        get() = _errorType
 
-    private val _showNoData = MutableLiveData<Boolean>().apply { value = false }
-    val showNoData: LiveData<Boolean>
-        get() = _showNoData
+    private val _cityList = MutableLiveData<List<Location>>()
+    val cityList: LiveData<List<Location>>
+        get() = _cityList
 
-    private val _showSearch = MutableLiveData<Boolean>().apply { value = true }
-    val showSearch: LiveData<Boolean>
-        get() = _showSearch
+    private val searchScreenState = MediatorLiveData<SearchScreenState>().apply {
+        value = SearchScreenState.INFO
+        addSource(_errorType) {
+            value = SearchScreenState.ERROR
+        }
+        addSource(_cityList) {
+            value =
+                if (_cityList.value != null && _cityList.value!!.isNotEmpty()) SearchScreenState.DATA else SearchScreenState.NO_DATA
+        }
+    }
 
-    private val _showList = MutableLiveData<Boolean>().apply { value = false }
-    val showList: LiveData<Boolean>
-        get() = _showList
+    val showLoader: LiveData<Boolean> = Transformations.map(searchScreenState) {
+        return@map it == SearchScreenState.LOADING
+    }
 
+    val showError: LiveData<Boolean> = Transformations.map(searchScreenState) {
+        return@map it == SearchScreenState.ERROR
+    }
 
+    val showNoData: LiveData<Boolean> = Transformations.map(searchScreenState) {
+        return@map it == SearchScreenState.NO_DATA
+    }
 
+    val showSearch: LiveData<Boolean> = Transformations.map(searchScreenState) {
+        return@map it == SearchScreenState.INFO
+    }
+
+    val showList: LiveData<Boolean> = Transformations.map(searchScreenState) {
+        return@map it == SearchScreenState.DATA
+    }
+
+    fun searchCity(query: String) {
+        if (searchCitySingle != null) {
+            return
+        }
+
+        searchCitySingle = weatherRepository.searchCity(query)
+        subscribeSearchCitySingle()?.let {
+            addSubscription(it)
+        }
+    }
+
+    private fun subscribeSearchCitySingle(): Disposable? {
+        return searchCitySingle?.let {
+            it.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    searchScreenState.value = SearchScreenState.LOADING
+                }
+                .doAfterTerminate {
+                    searchCitySingle = null
+                }
+                .subscribe({ locationList ->
+                    _cityList.value = locationList
+                }, { error ->
+                    _errorType.value = when (error) {
+                        is NetworkService.NetworkErrors.NoInternetConnection -> ErrorView.ErrorType.CONNECTION_ERROR
+                        else -> ErrorView.ErrorType.UNKNOWN_ERROR
+                    }
+                })
+        }
+    }
+
+    enum class SearchScreenState {
+        INFO, LOADING, ERROR, NO_DATA, DATA
+    }
 
 }

@@ -4,21 +4,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 import com.nextbest.weatherappandroid.utils.observe
 import com.nextbest.weatherappandroid.utils.setVisibility
+import com.nextbest.weatherappandroid.views.ErrorView
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
 
     override fun getViewModelClass() = SearchViewModel::class.java
+    private lateinit var cityAdapter: CityAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        setupSearchView()
+        setupErrorView()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -38,6 +49,46 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
         viewModel.showList.observe(this) {
             recyclerView.setVisibility(it)
         }
+        viewModel.errorType.observe(this) {
+            errorView.setErrorType(it)
+        }
+        viewModel.cityList.observe(this) {
+            cityAdapter.submitList(it)
+        }
+    }
+
+    private fun setupRecyclerView() {
+        cityAdapter = CityAdapter()
+
+        recyclerView.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = cityAdapter
+        }
+    }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    viewModel.searchCity(it)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
+    }
+
+    private fun setupErrorView() {
+        errorView.setReloadListener(object : ErrorView.Listener {
+            override fun reload() {
+                viewModel.searchCity(searchView.query.toString())
+            }
+        })
     }
 
 }
