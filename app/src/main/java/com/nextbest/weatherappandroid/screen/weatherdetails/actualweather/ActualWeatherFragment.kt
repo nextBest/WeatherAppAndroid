@@ -13,6 +13,9 @@ import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
 import com.nextbest.weatherappandroid.utils.BundleStorage
 import com.nextbest.weatherappandroid.utils.ListenerAttach
 import com.nextbest.weatherappandroid.utils.observe
+import com.nextbest.weatherappandroid.utils.setVisibility
+import com.nextbest.weatherappandroid.views.ErrorView
+import kotlinx.android.synthetic.main.fragment_actual_weather.*
 
 class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
 
@@ -26,6 +29,11 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
         return inflater.inflate(R.layout.fragment_actual_weather, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupErrorView()
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         listener = ListenerAttach.attachListener(context)
@@ -36,6 +44,26 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
         viewModel.title.observe(this) {
             listener.setTitle(it)
         }
+        viewModel.showLoader.observe(this) {
+            loaderView.setVisibility(it)
+        }
+        viewModel.showError.observe(this) {
+            errorView.setVisibility(it)
+        }
+        viewModel.errorType.observe(this) {
+            errorView.setErrorType(it)
+        }
+        viewModel.showData.observe(this) {
+            // TODO show data
+        }
+    }
+
+    private fun setupErrorView() {
+        errorView.setReloadListener(object : ErrorView.Listener {
+            override fun reload() {
+                viewModel.getWeatherInfo()
+            }
+        })
     }
 
     interface Listener {
