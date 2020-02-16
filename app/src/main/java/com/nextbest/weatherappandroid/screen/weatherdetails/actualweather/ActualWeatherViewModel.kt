@@ -1,8 +1,8 @@
 package com.nextbest.weatherappandroid.screen.weatherdetails.actualweather
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.model.WeatherData
 import com.nextbest.weatherappandroid.data.network.NetworkService
@@ -39,9 +39,13 @@ class ActualWeatherViewModel @Inject constructor(private val weatherRepository: 
     val errorType: LiveData<ErrorView.ErrorType>
         get() = _errorType
 
-    val showError: LiveData<Boolean> = Transformations.map(_errorType) {
-        return@map true
+    private val _showError = MediatorLiveData<Boolean>().apply {
+        addSource(_errorType) {
+            value = true
+        }
     }
+    val showError: LiveData<Boolean>
+        get() = _showError
 
 
     override fun init(
@@ -85,6 +89,7 @@ class ActualWeatherViewModel @Inject constructor(private val weatherRepository: 
             it.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
+                    _showError.value = false
                     _showLoader.value = true
                 }
                 .doAfterTerminate {
