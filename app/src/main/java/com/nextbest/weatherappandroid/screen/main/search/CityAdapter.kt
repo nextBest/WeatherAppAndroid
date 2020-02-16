@@ -8,7 +8,7 @@ import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 
 class CityAdapter(private val listener: Listener) :
-    ListAdapter<CityViewModel, CityViewHolder>(DiffCallback),
+    ListAdapter<CityCell, CityViewHolder>(DiffCallback),
     CityViewHolder.Listener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
@@ -27,7 +27,7 @@ class CityAdapter(private val listener: Listener) :
 
     fun setData(data: List<Location>) {
         submitList(data.map {
-            return@map CityViewModel(it)
+            return@map CityCell(it)
         })
     }
 
@@ -45,12 +45,12 @@ class CityAdapter(private val listener: Listener) :
         listener.cellClicked(location)
     }
 
-    private object DiffCallback : DiffUtil.ItemCallback<CityViewModel>() {
-        override fun areItemsTheSame(oldItem: CityViewModel, newItem: CityViewModel): Boolean {
+    private object DiffCallback : DiffUtil.ItemCallback<CityCell>() {
+        override fun areItemsTheSame(oldItem: CityCell, newItem: CityCell): Boolean {
             return oldItem.location.woeid == newItem.location.woeid
         }
 
-        override fun areContentsTheSame(oldItem: CityViewModel, newItem: CityViewModel): Boolean {
+        override fun areContentsTheSame(oldItem: CityCell, newItem: CityCell): Boolean {
             return oldItem == newItem
         }
     }

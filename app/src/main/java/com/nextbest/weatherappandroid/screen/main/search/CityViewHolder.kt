@@ -13,38 +13,38 @@ import kotlinx.android.synthetic.main.cell_city.view.*
 class CityViewHolder(itemView: View, listener: Listener) : RecyclerView.ViewHolder(itemView) {
 
     private var listPosition: Int = 0
-    private var cityViewModel: CityViewModel? = null
+    private var cityCell: CityCell? = null
 
     init {
         itemView.expandButton.setOnClickListener {
             listener.expandClicked(listPosition)
         }
         itemView.showPlace.setOnClickListener {
-            cityViewModel?.let { cityViewModel ->
+            cityCell?.let { cityViewModel ->
                 listener.showPlaceOnMap(cityViewModel.location)
             }
         }
         itemView.setOnClickListener {
-            cityViewModel?.let { cityViewModel ->
+            cityCell?.let { cityViewModel ->
                 listener.cellClicked(cityViewModel.location)
             }
         }
     }
 
-    fun bindData(cityViewModel: CityViewModel, position: Int) {
+    fun bindData(cityCell: CityCell, position: Int) {
         listPosition = position
-        this.cityViewModel = cityViewModel
+        this.cityCell = cityCell
         itemView.apply {
-            cityName.text = cityViewModel.location.title
-            infoLayout.setVisibility(cityViewModel.expanded)
+            cityName.text = cityCell.location.title
+            infoLayout.setVisibility(cityCell.expanded)
             expandButton.text =
-                context.getString(if (cityViewModel.expanded) R.string.search_show_less else R.string.search_show_more)
+                context.getString(if (cityCell.expanded) R.string.search_show_less else R.string.search_show_more)
             locationType.setTextWithSpan(
                 context.getString(
                     R.string.search_location_type,
-                    cityViewModel.location.location_type
+                    cityCell.location.location_type
                 ),
-                cityViewModel.location.location_type,
+                cityCell.location.location_type,
                 StyleSpan(Typeface.BOLD)
             )
         }
