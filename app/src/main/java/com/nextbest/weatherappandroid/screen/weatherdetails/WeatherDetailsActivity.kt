@@ -3,6 +3,7 @@ package com.nextbest.weatherappandroid.screen.weatherdetails
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.model.WeatherData
@@ -27,6 +28,20 @@ class WeatherDetailsActivity : DaggerAppCompatActivity(), ActualWeatherFragment.
                 )
             }
         }
+        setupToolbar()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home) {
+            onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(weatherToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun setTitle(title: String) {
