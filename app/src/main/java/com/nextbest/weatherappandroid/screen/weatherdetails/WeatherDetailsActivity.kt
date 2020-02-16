@@ -19,9 +19,9 @@ class WeatherDetailsActivity : DaggerAppCompatActivity() {
             intent?.extras?.run {
                 pushFragment(
                     ActualWeatherFragment.newInstance(
-                        getSerializable(WEATHER_DATA) as WeatherData, getSerializable(
+                        getSerializable(WEATHER_DATA) as? WeatherData, getSerializable(
                             LOCATION
-                        ) as Location
+                        ) as? Location
                     )
                 )
             }
