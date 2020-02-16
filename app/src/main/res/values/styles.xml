@@ -10,4 +10,9 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
+    <style name="borderButton">
+        <item name="buttonBackgroundColor">@android:color/white</item>
+        <item name="buttonBorderColor">@color/colorAccent</item>
+    </style>
+
 </resources>

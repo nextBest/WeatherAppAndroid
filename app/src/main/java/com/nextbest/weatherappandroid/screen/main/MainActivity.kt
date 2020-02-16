@@ -3,6 +3,7 @@ package com.nextbest.weatherappandroid.screen.main
 import android.os.Bundle
 import android.util.Log
 import com.nextbest.weatherappandroid.R
+import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.model.WeatherData
 import com.nextbest.weatherappandroid.screen.main.map.MapFragment
 import com.nextbest.weatherappandroid.screen.main.search.SearchFragment
@@ -10,7 +11,7 @@ import com.nextbest.weatherappandroid.utils.addFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener {
+class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener, SearchFragment.Listener {
 
     private lateinit var mapFragment: MapFragment
     private lateinit var searchFragment: SearchFragment
@@ -26,6 +27,7 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener {
             activeFragmentTag = savedInstanceState.getString(ACTIVE_FRAGMENT_TAG)
         }
         setupBottomNavigation()
+        setTitle()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -37,10 +39,15 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener {
     private fun initChildren() {
         mapFragment = MapFragment()
         searchFragment = SearchFragment()
-
         addFragment(mapFragment, MAP_FRAGMENT)
         addFragment(searchFragment, SEARCH_FRAGMENT, true)
+        activeFragmentTag = MAP_FRAGMENT
         mainBottomNavigation.selectedItemId = R.id.actionMap
+    }
+
+    private fun setTitle() {
+        mainToolbar.title =
+            getString(if (activeFragmentTag == MAP_FRAGMENT) R.string.map_menu else R.string.search_menu)
     }
 
     private fun setupBottomNavigation() {
@@ -71,9 +78,15 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener {
                 .commit()
         }
         activeFragmentTag = newActiveFragmentTag
+        setTitle()
     }
 
     override fun goToWeatherDetailsScreen(weatherData: WeatherData) {
+        // TODO imeplement details screen
+        Log.i(this.javaClass.simpleName, "goToWeatherDetailsScreen")
+    }
+
+    override fun goToWeatherDetailsScreen(location: Location) {
         // TODO imeplement details screen
         Log.i(this.javaClass.simpleName, "goToWeatherDetailsScreen")
     }

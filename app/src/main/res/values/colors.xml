@@ -5,4 +5,5 @@
     <color name="colorAccent">#534bae</color>
     <color name="alphaWhite">#50ffffff</color>
     <color name="errorColor">#F70000</color>
+    <color name="separatorColor">#B8B6B6</color>
 </resources>
