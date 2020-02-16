@@ -16,7 +16,15 @@ class WeatherDetailsActivity : DaggerAppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_details)
         if (savedInstanceState == null) {
-            pushFragment(ActualWeatherFragment())
+            intent?.extras?.run {
+                pushFragment(
+                    ActualWeatherFragment.newInstance(
+                        getSerializable(WEATHER_DATA) as WeatherData, getSerializable(
+                            LOCATION
+                        ) as Location
+                    )
+                )
+            }
         }
     }
 
@@ -29,8 +37,12 @@ class WeatherDetailsActivity : DaggerAppCompatActivity() {
             weatherData: WeatherData? = null,
             location: Location? = null
         ) = Intent(context, WeatherDetailsActivity::class.java).apply {
-            putExtra(WEATHER_DATA, weatherData)
-            putExtra(LOCATION, location)
+            weatherData?.let {
+                putExtra(WEATHER_DATA, it)
+            }
+            location?.let {
+                putExtra(LOCATION, it)
+            }
         }
     }
 }
