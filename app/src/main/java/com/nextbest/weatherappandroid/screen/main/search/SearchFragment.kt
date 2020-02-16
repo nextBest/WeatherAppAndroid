@@ -1,5 +1,6 @@
 package com.nextbest.weatherappandroid.screen.main.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +9,17 @@ import android.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nextbest.weatherappandroid.R
+import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.screen.BaseViewModelFragment
-import com.nextbest.weatherappandroid.utils.observe
-import com.nextbest.weatherappandroid.utils.setVisibility
+import com.nextbest.weatherappandroid.utils.*
 import com.nextbest.weatherappandroid.views.ErrorView
 import kotlinx.android.synthetic.main.fragment_search.*
 
-class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
+class SearchFragment : BaseViewModelFragment<SearchViewModel>(), CityAdapter.Listener {
 
     override fun getViewModelClass() = SearchViewModel::class.java
     private lateinit var cityAdapter: CityAdapter
+    private lateinit var listener: Listener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +34,11 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
         setupSearchView()
         setupErrorView()
         setupHideSearchViewOnScrollList()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = ListenerAttach.attachListener(context)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -57,10 +64,16 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
         viewModel.cityList.observe(this) {
             cityAdapter.setData(it)
         }
+        viewModel.showPlaceOnMap.observeEvent(this) {
+            context?.showPlaceOnMap(it)
+        }
+        viewModel.goToWeatherDetailsScreen.observeEvent(this) {
+            listener.goToWeatherDetailsScreen(it)
+        }
     }
 
     private fun setupRecyclerView() {
-        cityAdapter = CityAdapter()
+        cityAdapter = CityAdapter(this)
 
         recyclerView.apply {
             setHasFixedSize(true)
@@ -110,4 +123,15 @@ class SearchFragment : BaseViewModelFragment<SearchViewModel>() {
         })
     }
 
+    override fun cellClicked(location: Location) {
+        viewModel.cellClicked(location)
+    }
+
+    override fun showPlaceOnMap(location: Location) {
+        viewModel.showPlaceOnMap(location)
+    }
+
+    interface Listener {
+        fun goToWeatherDetailsScreen(location: Location)
+    }
 }

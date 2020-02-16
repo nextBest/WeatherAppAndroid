@@ -8,6 +8,7 @@ import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.network.NetworkService
 import com.nextbest.weatherappandroid.data.repository.WeatherRepository
 import com.nextbest.weatherappandroid.screen.BaseViewModel
+import com.nextbest.weatherappandroid.utils.Event
 import com.nextbest.weatherappandroid.views.ErrorView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -59,6 +60,15 @@ class SearchViewModel @Inject constructor(private val weatherRepository: Weather
         return@map it == SearchScreenState.DATA
     }
 
+
+    private val _goToWeatherDetailsScreen = MutableLiveData<Event<Location>>()
+    val goToWeatherDetailsScreen: LiveData<Event<Location>>
+        get() = _goToWeatherDetailsScreen
+
+    private val _showPlaceOnMap = MutableLiveData<Event<String>>()
+    val showPlaceOnMap: LiveData<Event<String>>
+        get() = _showPlaceOnMap
+
     fun searchCity(query: String) {
         if (searchCitySingle != null) {
             return
@@ -68,6 +78,14 @@ class SearchViewModel @Inject constructor(private val weatherRepository: Weather
         subscribeSearchCitySingle()?.let {
             addSubscription(it)
         }
+    }
+
+    fun cellClicked(location: Location) {
+        _goToWeatherDetailsScreen.value = Event(location)
+    }
+
+    fun showPlaceOnMap(location: Location) {
+        _showPlaceOnMap.value = Event(location.latt_long)
     }
 
     private fun subscribeSearchCitySingle(): Disposable? {

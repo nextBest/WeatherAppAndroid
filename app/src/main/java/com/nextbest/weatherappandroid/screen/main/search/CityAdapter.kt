@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 
-class CityAdapter : ListAdapter<CityViewModel, CityViewHolder>(DiffCallback),
+class CityAdapter(private val listener: Listener) :
+    ListAdapter<CityViewModel, CityViewHolder>(DiffCallback),
     CityViewHolder.Listener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
@@ -36,6 +37,14 @@ class CityAdapter : ListAdapter<CityViewModel, CityViewHolder>(DiffCallback),
         notifyItemChanged(position)
     }
 
+    override fun showPlaceOnMap(location: Location) {
+        listener.showPlaceOnMap(location)
+    }
+
+    override fun cellClicked(location: Location) {
+        listener.cellClicked(location)
+    }
+
     private object DiffCallback : DiffUtil.ItemCallback<CityViewModel>() {
         override fun areItemsTheSame(oldItem: CityViewModel, newItem: CityViewModel): Boolean {
             return oldItem.location.woeid == newItem.location.woeid
@@ -44,5 +53,10 @@ class CityAdapter : ListAdapter<CityViewModel, CityViewHolder>(DiffCallback),
         override fun areContentsTheSame(oldItem: CityViewModel, newItem: CityViewModel): Boolean {
             return oldItem == newItem
         }
+    }
+
+    interface Listener {
+        fun showPlaceOnMap(location: Location)
+        fun cellClicked(location: Location)
     }
 }
