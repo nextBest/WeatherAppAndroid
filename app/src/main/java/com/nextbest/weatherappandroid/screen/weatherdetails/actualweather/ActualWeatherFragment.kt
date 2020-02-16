@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.model.WeatherData
@@ -31,6 +32,7 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
         setupErrorView()
     }
 
@@ -64,6 +66,13 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
                 viewModel.getWeatherInfo()
             }
         })
+    }
+
+    private fun setupRecyclerView() {
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+        }
     }
 
     interface Listener {
