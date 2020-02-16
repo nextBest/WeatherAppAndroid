@@ -17,3 +17,8 @@ fun AppCompatActivity.addFragment(fragment: Fragment, tag: String, hidden: Boole
         .apply { if (hidden) hide(fragment) }
         .commit()
 }
+
+fun AppCompatActivity.pushFragment(fragment: Fragment) {
+    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment)
+        .commit()
+}

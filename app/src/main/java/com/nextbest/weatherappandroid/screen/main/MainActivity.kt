@@ -1,12 +1,12 @@
 package com.nextbest.weatherappandroid.screen.main
 
 import android.os.Bundle
-import android.util.Log
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.model.WeatherData
 import com.nextbest.weatherappandroid.screen.main.map.MapFragment
 import com.nextbest.weatherappandroid.screen.main.search.SearchFragment
+import com.nextbest.weatherappandroid.screen.weatherdetails.WeatherDetailsActivity
 import com.nextbest.weatherappandroid.utils.addFragment
 import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -82,13 +82,11 @@ class MainActivity : DaggerAppCompatActivity(), MapFragment.Listener, SearchFrag
     }
 
     override fun goToWeatherDetailsScreen(weatherData: WeatherData) {
-        // TODO imeplement details screen
-        Log.i(this.javaClass.simpleName, "goToWeatherDetailsScreen")
+        startActivity(WeatherDetailsActivity.newIntent(this, weatherData = weatherData))
     }
 
     override fun goToWeatherDetailsScreen(location: Location) {
-        // TODO imeplement details screen
-        Log.i(this.javaClass.simpleName, "goToWeatherDetailsScreen")
+        startActivity(WeatherDetailsActivity.newIntent(this, location = location))
     }
 
     companion object {

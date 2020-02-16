@@ -1,5 +1,7 @@
 package com.nextbest.weatherappandroid.data.model
 
+import java.io.Serializable
+
 data class WeatherData(
     val consolidated_weather: List<Weather>,
     val latt_long: String,
@@ -13,4 +15,4 @@ data class WeatherData(
     val timezone_name: String,
     val title: String,
     val woeid: Int
-)
+) : Serializable
