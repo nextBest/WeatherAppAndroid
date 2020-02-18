@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#000051</color>
     <color name="colorAccent">#534bae</color>
     <color name="alphaWhite">#50ffffff</color>
+    <color name="alphaBlack">#50000000</color>
     <color name="errorColor">#F70000</color>
     <color name="separatorColor">#B8B6B6</color>
 </resources>
