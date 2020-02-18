@@ -1,6 +1,7 @@
 package com.nextbest.weatherappandroid.data.network
 
 import android.content.Context
+import com.google.gson.GsonBuilder
 import com.nextbest.weatherappandroid.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,10 +14,12 @@ class NetworkService(private val context: Context) {
     private val retrofit: Retrofit
 
     init {
+        val gson = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()
+
         retrofit = Retrofit.Builder()
             .client(createHttpClient())
             .baseUrl(BuildConfig.API_PATH)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }

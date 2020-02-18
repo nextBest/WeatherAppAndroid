@@ -22,6 +22,7 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
 
     override fun getViewModelClass() = ActualWeatherViewModel::class.java
     private lateinit var listener: Listener
+    private lateinit var weatherDetailsAdapter: WeatherDetailsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +57,12 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
             errorView.setErrorType(it)
         }
         viewModel.showData.observe(this) {
-            // TODO show data
+            // tODO fix show visibility
+            recyclerView.setVisibility(true)
+            weatherDetailsAdapter.setData(it)
+        }
+        viewModel.backgroundRes.observe(this) {
+            container.setBackgroundResource(it)
         }
     }
 
@@ -69,9 +75,11 @@ class ActualWeatherFragment : BaseViewModelFragment<ActualWeatherViewModel>() {
     }
 
     private fun setupRecyclerView() {
+        weatherDetailsAdapter = WeatherDetailsAdapter()
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
+            adapter = weatherDetailsAdapter
         }
     }
 

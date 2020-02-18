@@ -3,18 +3,22 @@ package com.nextbest.weatherappandroid.screen.weatherdetails.actualweather
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Location
 import com.nextbest.weatherappandroid.data.model.WeatherData
 import com.nextbest.weatherappandroid.data.network.NetworkService
 import com.nextbest.weatherappandroid.data.repository.WeatherRepository
 import com.nextbest.weatherappandroid.screen.BaseViewModel
 import com.nextbest.weatherappandroid.utils.KeyValueStorage
+import com.nextbest.weatherappandroid.utils.TimeOfDay
+import com.nextbest.weatherappandroid.utils.getTimeOfDay
 import com.nextbest.weatherappandroid.views.ErrorView
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+
 
 class ActualWeatherViewModel @Inject constructor(private val weatherRepository: WeatherRepository) :
     BaseViewModel() {
@@ -47,6 +51,10 @@ class ActualWeatherViewModel @Inject constructor(private val weatherRepository: 
     val showError: LiveData<Boolean>
         get() = _showError
 
+    private val _backgroundRes = MutableLiveData<Int>()
+    val backgroundRes: LiveData<Int>
+        get() = _backgroundRes
+
 
     override fun init(
         argumentsKeyValueStorage: KeyValueStorage?,
@@ -68,7 +76,7 @@ class ActualWeatherViewModel @Inject constructor(private val weatherRepository: 
         if (weatherData == null) {
             getWeatherInfo()
         } else {
-            _showData.value = weatherData
+            showData()
         }
     }
 
@@ -98,13 +106,25 @@ class ActualWeatherViewModel @Inject constructor(private val weatherRepository: 
                 }
                 .subscribe({ weatherData ->
                     this.weatherData = weatherData
-                    _showData.value = weatherData
+                    showData()
                 }, { error ->
                     _errorType.value = when (error) {
                         is NetworkService.NetworkErrors.NoInternetConnection -> ErrorView.ErrorType.CONNECTION_ERROR
                         else -> ErrorView.ErrorType.UNKNOWN_ERROR
                     }
                 })
+        }
+    }
+
+    private fun showData() {
+        _backgroundRes.value = getBackgroundRes()
+        _showData.value = weatherData
+    }
+
+    private fun getBackgroundRes(): Int {
+        return when (weatherData?.time?.getTimeOfDay()) {
+            TimeOfDay.DAY -> R.drawable.bg_day
+            else -> R.drawable.bg_night
         }
     }
 
