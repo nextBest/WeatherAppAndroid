@@ -38,6 +38,7 @@ android {
     productFlavors {
         development {
             buildConfigField "String", "API_PATH", "\"https://www.metaweather.com/api/\""
+            buildConfigField "String", "IMAGE_PATH", "\"https://www.metaweather.com/static/img/weather/png/\""
             manifestPlaceholders = ["GOOGLE_GEO_API_KEY": localProperties.getProperty('googleGeoApiKey')]
         }
     }
