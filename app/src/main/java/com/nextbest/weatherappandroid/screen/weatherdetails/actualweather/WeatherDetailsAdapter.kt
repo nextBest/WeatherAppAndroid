@@ -40,5 +40,6 @@ class WeatherDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setData(weatherData: WeatherData) {
         this.weatherData = weatherData
+        notifyDataSetChanged()
     }
 }
