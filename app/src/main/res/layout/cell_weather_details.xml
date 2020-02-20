@@ -1,6 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/weatherCellDefaultStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription">
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/weatherCellDarkBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/actual_weather_details"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/titleSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <ImageView
+            android:id="@+id/weatherImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleSeparator" />
+
+        <TextView
+            android:id="@+id/humidity"
+            style="@style/descriptionStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/humidityTitle"
+            app:layout_constraintLeft_toRightOf="@id/humidityTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/humidityTitle"
+            tools:text="100 %" />
+
+
+        <TextView
+            android:id="@+id/humidityTitle"
+            style="@style/descriptionStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/actual_weather_humidity"
+            app:layout_constraintLeft_toRightOf="@id/weatherImage"
+            app:layout_constraintRight_toLeftOf="@id/humidity"
+            app:layout_constraintTop_toBottomOf="@id/titleSeparator" />
+
+        <View
+            android:id="@+id/humiditySeparator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            app:layout_constraintLeft_toLeftOf="@id/humidityTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/humidityTitle" />
+
+        <TextView
+            android:id="@+id/weatherVisibility"
+            style="@style/descriptionStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/visibilityTitle"
+            app:layout_constraintLeft_toRightOf="@id/visibilityTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/visibilityTitle"
+            tools:text="14 km" />
+
+
+        <TextView
+            android:id="@+id/visibilityTitle"
+            style="@style/descriptionStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/actual_weather_visibility"
+            app:layout_constraintLeft_toRightOf="@id/weatherImage"
+            app:layout_constraintRight_toLeftOf="@id/weatherVisibility"
+            app:layout_constraintTop_toBottomOf="@id/humiditySeparator" />
+
+        <View
+            android:id="@+id/visibilitySeparator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            app:layout_constraintLeft_toLeftOf="@id/visibilityTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/visibilityTitle" />
+
+        <TextView
+            android:id="@+id/pressure"
+            style="@style/descriptionStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/pressureTitle"
+            app:layout_constraintLeft_toRightOf="@id/pressureTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/pressureTitle"
+            tools:text="1,003 mBar" />
+
+
+        <TextView
+            android:id="@+id/pressureTitle"
+            style="@style/descriptionStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/actual_weather_pressure"
+            app:layout_constraintLeft_toRightOf="@id/weatherImage"
+            app:layout_constraintRight_toLeftOf="@id/pressure"
+            app:layout_constraintTop_toBottomOf="@id/visibilitySeparator" />
+
+        <View
+            android:id="@+id/pressureSeparator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            app:layout_constraintLeft_toLeftOf="@id/pressureTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pressureTitle" />
+
+        <TextView
+            android:id="@+id/predictability"
+            style="@style/descriptionStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/predictabilityTitle"
+            app:layout_constraintLeft_toRightOf="@id/predictabilityTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/predictabilityTitle"
+            tools:text="1,003 mBar" />
+
+
+        <TextView
+            android:id="@+id/predictabilityTitle"
+            style="@style/descriptionStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/actual_weather_predictability"
+            app:layout_constraintLeft_toRightOf="@id/weatherImage"
+            app:layout_constraintRight_toLeftOf="@id/predictability"
+            app:layout_constraintTop_toBottomOf="@id/pressureSeparator" />
+
+        <View
+            android:id="@+id/predictabilitySeparator"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            app:layout_constraintLeft_toLeftOf="@id/predictabilityTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/predictabilityTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

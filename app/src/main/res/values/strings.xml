@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">WeatherAppAndroid</string>
-    
+
     <!--Common-->
     <string name="no_internet_connection">No internet connection. Try again later.</string>
     <string name="unknown_error">A problem occurred. Try again later.</string>
@@ -29,11 +29,18 @@
     <string name="search_show_less">Show less</string>
     <string name="search_show_place">Show place on map</string>
     <string name="search_location_type">Location type: %s</string>
-    
+
     <!--Error View-->
     <string name="error_view_reload">Reload</string>
     <string name="error_view_connection_error_title">Connection Error</string>
     <string name="error_view_connection_error_message">No internet connection. Check your internet connection and click reload.</string>
     <string name="error_view_unknown_error_title">Error occurred</string>
     <string name="error_view_unknown_error_message">Error occurred. Click reload.</string>
+
+    <!--Actual Weather-->
+    <string name="actual_weather_details">Details</string>
+    <string name="actual_weather_humidity">Humidity</string>
+    <string name="actual_weather_visibility">Visibility</string>
+    <string name="actual_weather_pressure">Pressure</string>
+    <string name="actual_weather_predictability">Predictability</string>
 </resources>
