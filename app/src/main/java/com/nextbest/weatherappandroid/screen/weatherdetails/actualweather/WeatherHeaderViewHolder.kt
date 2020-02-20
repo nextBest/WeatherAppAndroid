@@ -17,9 +17,9 @@ class WeatherHeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
         itemView.apply {
             weather?.let {
                 Glide.with(context).load(BuildConfig.IMAGE_PATH + it.weather_state_abbr + ".png")
-                    .into(itemView.weatherImage)
-                itemView.weatherState.text = it.weather_state_name
-                itemView.temperature.text = it.the_temp.temperature()
+                    .into(weatherImage)
+                weatherState.text = it.weather_state_name
+                temperature.text = it.the_temp.temperature()
             }
         }
     }

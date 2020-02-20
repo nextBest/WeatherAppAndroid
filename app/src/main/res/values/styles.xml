@@ -15,4 +15,23 @@
         <item name="buttonBorderColor">@color/colorAccent</item>
     </style>
 
+    <style name="weatherCellDefaultStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+    </style>
+
+    <style name="weatherCellDarkBackground">
+        <item name="android:background">@drawable/rounded_black_transparent_background</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="descriptionStyle">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
 </resources>
