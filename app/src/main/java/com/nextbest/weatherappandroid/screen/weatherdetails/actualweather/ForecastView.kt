@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.nextbest.weatherappandroid.BuildConfig
 import com.nextbest.weatherappandroid.R
 import com.nextbest.weatherappandroid.data.model.Weather
+import com.nextbest.weatherappandroid.utils.getDayName
 import com.nextbest.weatherappandroid.utils.temperature
 import kotlinx.android.synthetic.main.forecast_view.view.*
 
@@ -24,7 +25,7 @@ class ForecastView @JvmOverloads constructor(
     }
 
     fun setupView(weather: Weather) {
-        day.text = weather.applicable_date.toString()
+        day.text = weather.applicable_date.getDayName()
         Glide.with(context).load(BuildConfig.IMAGE_PATH + weather.weather_state_abbr + ".png")
             .into(weatherImage)
         minTemp.text = weather.min_temp.temperature()

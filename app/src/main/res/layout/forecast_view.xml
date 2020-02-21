@@ -11,45 +11,44 @@
         android:id="@+id/dataLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/day"
             style="@style/descriptionStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Monday" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
+        <ImageView
+            android:id="@+id/weatherImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            tools:ignore="ContentDescription" />
 
-            <ImageView
-                android:id="@+id/weatherImage"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                tools:ignore="ContentDescription" />
-
-        </RelativeLayout>
 
         <TextView
-            android:id="@+id/minTemp"
+            android:id="@+id/maxTemp"
             style="@style/descriptionStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:text="1 °C" />
 
         <TextView
-            android:id="@+id/maxTemp"
+            android:id="@+id/minTemp"
             style="@style/descriptionStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/nightColor"
             tools:text="1 °C" />
 
 

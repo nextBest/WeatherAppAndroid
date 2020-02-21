@@ -1,11 +1,12 @@
 package com.nextbest.weatherappandroid.data.model
 
 import java.io.Serializable
+import java.util.*
 
 data class Weather(
     val air_pressure: Double,
-    val applicable_date: String,
-    val created: String,
+    val applicable_date: Date,
+    val created: Date,
     val humidity: Int,
     val id: Long,
     val max_temp: Double,
@@ -18,4 +19,4 @@ data class Weather(
     val wind_direction: Double,
     val wind_direction_compass: String,
     val wind_speed: Double
-): Serializable
+) : Serializable
