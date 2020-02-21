@@ -64,7 +64,7 @@ class ActualWeatherViewModel @Inject constructor(private val weatherRepository: 
         getDataFromKeyValueStorage(argumentsKeyValueStorage)
         getDataFromKeyValueStorage(instanceStateKeyValueStorage)
 
-        if (argumentsKeyValueStorage == null) {
+        if (argumentsKeyValueStorage != null) {
             _title.value = weatherData?.let {
                 return@let it.title
             } ?: run { location?.title ?: "" }

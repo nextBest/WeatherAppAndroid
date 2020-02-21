@@ -45,7 +45,7 @@ class WeatherDetailsActivity : DaggerAppCompatActivity(), ActualWeatherFragment.
     }
 
     override fun setTitle(title: String) {
-        weatherToolbar.title = title
+        supportActionBar?.title = title
     }
 
     companion object {
