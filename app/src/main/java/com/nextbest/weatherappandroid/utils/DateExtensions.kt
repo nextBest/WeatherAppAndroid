@@ -1,5 +1,6 @@
 package com.nextbest.weatherappandroid.utils
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 fun Date.getTimeOfDay(): TimeOfDay {
@@ -11,6 +12,10 @@ fun Date.getTimeOfDay(): TimeOfDay {
         }
 
     }
+}
+
+fun Date.getDayName(): String {
+    return SimpleDateFormat("EEEE", Locale.getDefault()).format(this)
 }
 
 enum class TimeOfDay {

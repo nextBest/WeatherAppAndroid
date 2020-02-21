@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/weatherCellDefaultStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/weatherCellDarkBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/titleStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/actual_weather_forecast"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/titleSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@android:color/white"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <com.nextbest.weatherappandroid.screen.weatherdetails.actualweather.ForecastView
+            android:id="@+id/forecastDayOne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/titleSeparator" />
+
+        <com.nextbest.weatherappandroid.screen.weatherdetails.actualweather.ForecastView
+            android:id="@+id/forecastDayTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/forecastDayOne" />
+
+        <com.nextbest.weatherappandroid.screen.weatherdetails.actualweather.ForecastView
+            android:id="@+id/forecastDayThree"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/forecastDayTwo" />
+
+        <com.nextbest.weatherappandroid.screen.weatherdetails.actualweather.ForecastView
+            android:id="@+id/forecastDayFour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/forecastDayThree" />
+
+        <com.nextbest.weatherappandroid.screen.weatherdetails.actualweather.ForecastView
+            android:id="@+id/forecastDayFive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/forecastDayFour" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -43,4 +43,5 @@
     <string name="actual_weather_visibility">Visibility</string>
     <string name="actual_weather_pressure">Pressure</string>
     <string name="actual_weather_predictability">Predictability</string>
+    <string name="actual_weather_forecast">Forecast</string>
 </resources>

@@ -13,12 +13,13 @@ class WeatherDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (viewType) {
             R.layout.cell_weather_header -> WeatherHeaderViewHolder.create(parent)
             R.layout.cell_weather_details -> WeatherDetailsViewHolder.create(parent)
+            R.layout.cell_weather_forecast -> WeatherForecastViewHolder.create(parent)
             else -> throw IllegalArgumentException()
         }
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -27,6 +28,7 @@ class WeatherDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             R.layout.cell_weather_details -> (holder as WeatherDetailsViewHolder).bindData(
                 weatherData?.consolidated_weather?.first()
             )
+            R.layout.cell_weather_forecast -> (holder as WeatherForecastViewHolder).bindData(weatherData?.consolidated_weather)
         }
     }
 
@@ -34,6 +36,7 @@ class WeatherDetailsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return when (position) {
             0 -> R.layout.cell_weather_header
             1 -> R.layout.cell_weather_details
+            2 -> R.layout.cell_weather_forecast
             else -> throw IllegalArgumentException()
         }
     }
